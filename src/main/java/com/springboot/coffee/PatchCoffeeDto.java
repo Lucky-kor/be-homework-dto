@@ -11,10 +11,11 @@ import javax.validation.constraints.Pattern;
 @Getter
 @Setter
 public class PatchCoffeeDto {
+
 	private long coffeeId;
 
 	@NotSpace(message = "공백만 들어가면 안됩니다.")
-	@Pattern(regexp = "^[ㄱ-ㅎ|가-힣]+$",message = "한글만 들어와야 됩니다.")
+	@Pattern(regexp = "^[가-힣]+$",message = "한글만 들어와야 됩니다.")
 	private String korName;
 
 	@NotSpace(message = "공백만 들어가면 안됩니다.")
