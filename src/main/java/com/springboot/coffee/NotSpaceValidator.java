@@ -1,6 +1,5 @@
 package com.springboot.coffee;
 
-import com.springboot.coffee.NotSpace;
 import org.springframework.util.StringUtils;
 
 import javax.validation.ConstraintValidator;
