@@ -22,9 +22,7 @@ public class MemberController {
     public ResponseEntity patchMember(@PathVariable("member-id") @Min(1) long memberId,
                                       @Valid @RequestBody MemberPatchDto memberPatchDto) {
         memberPatchDto.setMemberId(memberId);
-
         // No need Business logic
-
         return new ResponseEntity<>(memberPatchDto, HttpStatus.OK);
     }
 
