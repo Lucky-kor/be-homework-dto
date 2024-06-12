@@ -1,5 +1,7 @@
 package com.springboot.member;
 
+import lombok.Getter;
+
 import javax.validation.constraints.*;
 
 public class MemberPostDto {
