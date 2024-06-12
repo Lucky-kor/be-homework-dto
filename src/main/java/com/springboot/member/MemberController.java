@@ -23,7 +23,7 @@ public class MemberController {
                                       @Valid @RequestBody MemberPatchDto memberPatchDto) {
         memberPatchDto.setMemberId(memberId);
 
-        // No need Business logic
+        //DTO -> Entity
 
         return new ResponseEntity<>(memberPatchDto, HttpStatus.OK);
     }
@@ -32,7 +32,8 @@ public class MemberController {
     public ResponseEntity getMember(@PathVariable("member-id") @Min(1) long memberId) {
         System.out.println("# memberId: " + memberId);
 
-        // not implementation
+        //Entity --> DTO
+        MemberResponseDto responseDto
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
