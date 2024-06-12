@@ -2,39 +2,32 @@ package com.springboot.coffee;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
-import java.util.Map;
+import javax.validation.Valid;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.Positive;
 
 @RestController
 @RequestMapping("/v1/coffees")
+@Validated // 모든 메서드 파라미터에 PathVariable 검증
 public class CoffeeController {
     // 1. DTO 클래스 및 유효성 검증을 적용하세요.
     @PostMapping
-    public ResponseEntity postCoffee(@RequestParam("korName") String korName,
-                                     @RequestParam("engName") String engName,
-                                     @RequestParam("price") int price) {
-        Map<String, Object> map = new HashMap<>();
-        map.put("korName", korName);
-        map.put("engName", engName);
-        map.put("price", price);
+    public ResponseEntity postCoffee(@Valid @RequestBody CoffeePostDto coffeePostDto)  { // 객체가 생성되야 밑에 코드가 실행댐
 
-
-        return new ResponseEntity<>(map, HttpStatus.CREATED);
+        return new ResponseEntity<>(coffeePostDto, HttpStatus.CREATED);
     }
 
     // 2. DTO 클래스 및 유효성 검증을 적용하세요.
     @PatchMapping("/{coffee-id}")
-    public ResponseEntity patchCoffee(@PathVariable("coffee-id") long coffeeId,
-                                      @RequestParam("korName") String korName,
-                                      @RequestParam("price") int price) {
-        Map<String, Object> body = new HashMap<>();
-        body.put("coffeeId", coffeeId);
-        body.put("korName", korName);
-        body.put("engName", "Vanilla Latte");
-        body.put("price", price);
-        return new ResponseEntity<>(body, HttpStatus.OK);
+    public ResponseEntity patchCoffee(@Positive @PathVariable("coffee-id") @Min(1) Long coffeeId, //MIN(1) 은 클래스위에 어노태이션
+                                      @Valid @RequestBody CoffeePatchDto coffeePatchDto) {
+
+        coffeePatchDto.setCoffeeId(coffeeId);
+
+        return new ResponseEntity<>(coffeePatchDto, HttpStatus.OK);
     }
 
     @GetMapping("/{coffee-id}")
