@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.Positive;
 
 @Validated
 @RestController
@@ -21,7 +22,7 @@ public class CoffeeController {
 
     // 2. DTO 클래스 및 유효성 검증을 적용하세요.
     @PatchMapping("/{coffee-id}")
-    public ResponseEntity patchCoffee(@PathVariable("coffee-id") @Min(1) long coffeeId,
+    public ResponseEntity patchCoffee(@Positive @PathVariable("coffee-id") long coffeeId,
                                       @Valid
                                       @RequestBody PatchCoffeeDto patchCoffeeDto) {
         patchCoffeeDto.setCoffeeId(coffeeId);
