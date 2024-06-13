@@ -12,6 +12,6 @@ import java.util.List;
 public interface MemberMapper {
     Member memberPostDtoToMember(MemberPostDto memberPostDto);
     Member memberPatchDtoToMember(MemberPatchDto memberPatchDto);
-    MemberResponseDto memberToMemberResponseDto(MemberResponseDto memberResponseDto);
+    MemberResponseDto memberToMemberResponseDto(Member member);
     List<MemberResponseDto> MembersToMembersResponseDtos(List<Member> members);
 }
